@@ -1,7 +1,11 @@
 import cv2
 import os
 import tensorflow as tf
+import numpy as np
 import preprocessor
+
+# Disable TensorFlow 2.x behavior to use TensorFlow 1.x style
+tf.compat.v1.disable_eager_execution()
 
 
 def main():
@@ -36,27 +40,27 @@ def main():
 
 # Softmax Regression Model
 def regression(x):
-    W = tf.Variable(tf.zeros([901, 2]), name="W")
-    b = tf.Variable(tf.zeros([2]), name="b")
+    W = tf.compat.v1.Variable(tf.zeros([901, 2]), name="W")
+    b = tf.compat.v1.Variable(tf.zeros([2]), name="b")
     y = tf.nn.softmax(tf.matmul(x, W) + b)
     return y, [W, b]
 
 
 def sgd(training_data, training_labels, test_data, test_labels):
     # model
-    with tf.variable_scope("regression"):
-        x = tf.placeholder(tf.float32, [None, 901])
+    with tf.compat.v1.variable_scope("regression"):
+        x = tf.compat.v1.placeholder(tf.float32, [None, 901])
         y, variables = regression(x)
 
     # train
-    y_ = tf.placeholder("float", [None, 2])
-    cross_entropy = -tf.reduce_sum(y_ * tf.log(y))
-    train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
+    y_ = tf.compat.v1.placeholder("float", [None, 2])
+    cross_entropy = -tf.reduce_sum(y_ * tf.math.log(y))
+    train_step = tf.compat.v1.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
     correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-    with tf.Session() as sess:
-        sess.run(tf.global_variables_initializer())
+    with tf.compat.v1.Session() as sess:
+        sess.run(tf.compat.v1.global_variables_initializer())
         sess.run(train_step, feed_dict={x: training_data, y_: training_labels})
         print(sess.run(accuracy, feed_dict={x: test_data, y_: test_labels}))
 
