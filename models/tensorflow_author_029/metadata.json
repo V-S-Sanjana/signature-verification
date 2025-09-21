@@ -1,0 +1,6 @@
+{
+  "author_id": "029",
+  "final_accuracy": 0.5,
+  "trained_at": "2025-09-21T22:05:49.798113",
+  "model_path": "models/tensorflow_author_029\\model.ckpt"
+}

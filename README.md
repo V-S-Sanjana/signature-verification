@@ -66,8 +66,8 @@ The system is trained using the [ICDAR 2009 Signature Verification Competition (
 4. Check sample signatures for reference
 
 ### Command Line
-- **Custom Neural Network**: `python sigrecog.py`
-- **TensorFlow Model**: `python sigrecogtf.py`
+- **Train Both Models**: `python train_models.py`
+- **Load and Test Models**: Use the model utilities in `model_utils.py`
 
 ## 📁 Project Structure
 
@@ -75,13 +75,18 @@ The system is trained using the [ICDAR 2009 Signature Verification Competition (
 signature-verification/
 ├── app.py                 # Flask web application
 ├── network.py            # Custom neural network implementation
-├── sigrecogtf.py         # TensorFlow model implementation
+├── train_models.py       # Comprehensive training script for both models
+├── model_utils.py        # Model loading and utility functions
 ├── preprocessor.py       # Image preprocessing utilities
 ├── requirements.txt      # Python dependencies
 ├── run_app.bat          # Windows batch file to run the app
 ├── templates/           # HTML templates
 │   ├── index.html       # Main interface
 │   └── samples.html     # Sample signatures page
+├── models/              # Trained models directory
+│   ├── custom_nn_author_*.pkl    # Custom neural network models
+│   ├── tensorflow_author_*/      # TensorFlow models
+│   └── training_summary.json     # Training results summary
 ├── data/               # Training and test datasets
 │   ├── training/       # Training data
 │   └── test/          # Test data

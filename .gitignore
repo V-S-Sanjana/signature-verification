@@ -20,6 +20,27 @@ lib
 lib64
 __pycache__
 
+# Uploaded files
+uploads/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+
+# Model files (optional - you might want to keep these)
+# models/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# IDE files
+.vscode/
+.idea/
+
 # Installer logs
 pip-log.txt
 
